@@ -1,4 +1,19 @@
-import { test, expect } from '@playwright/test';
+import {test, expect} from '@playwright/test';
+import {faker} from '@faker-js/faker';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+const appUrl = process.env.URL ?? 'http://localhost:3000';
+console.log(`Using URL: ${appUrl}`);
+
+test.describe('Faker.js test', () => {
+  test('should generate random user data', async () => {
+    const randomName = faker.internet.displayName();
+    const randomEmail = faker.internet.email();
+    console.log(`Generated User: ${randomName}, Email: ${randomEmail}`);
+    expect(randomName).toBeDefined();
+  });
+});
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
